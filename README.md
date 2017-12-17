@@ -1,4 +1,6 @@
+
 # NLP_Char_Translation
+### ![alt text](https://ddqt2avvbpaxu.cloudfront.net/cdn/v1/nyu-mac/marketing/favicon.ico) NYU CDS DS-GA-1011 NLP with Representation Learning   
 
 Implementations of two Neural Machine Translation Models:   
 
