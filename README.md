@@ -4,7 +4,7 @@ Implementations of two Neural Machine Translation Models:
 
 **1. CNN-ResNet-BiGRU**    
 
-Paper: ["Fully Character-Level Neural Machine Translation without Explicit Segmentation", 2016](https://arxiv.org/abs/1610.03017).   
+Paper: ["Fully Character-Level Neural Machine Translation without Explicit Segmentation", 2016](https://arxiv.org/abs/1610.03017)   
 Implementation: [https://github.com/violaciao/Char-NMT](https://github.com/violaciao/Char-NMT)
 
 
