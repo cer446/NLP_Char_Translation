@@ -191,8 +191,8 @@ def train(config):
                 valid_losses.append(math.exp(valid_loss / valid_steps))
                 #stop training if average of most recent 3 isn't lower than average of prev 3
                 try:
-                    early_stop = float(sum(valid_losses[-6:-3])) <= float(sum(valid_losses[-3:]))
-                if early_stop & len(valid_losses) >= 6:
+                    early_stop = float(sum(valid_losses[-12:-6])) <= float(sum(valid_losses[-6:]))
+                if early_stop and len(valid_losses) >= 12:
                     print 'Early stopping triggered'
                     break
 
@@ -207,7 +207,7 @@ def train(config):
                 torch.save(model_state, model_path)
 
         # Increase the epoch index of the model
-        if early_stop:
+        if early_stop and len(valid_losses) >= 12:
             break
         model_state['epoch'] += 1
         print 'Epoch {0:} DONE'.format(model_state['epoch'])
@@ -226,23 +226,23 @@ if __name__ == "  __main__":
 
     # Network parameters
     parser.add_argument('--kernel_size', type=int, default=2)
-    parser.add_argument('--hidden_size', type=int, default=1024)
+    parser.add_argument('--hidden_size', type=int, default=512)
     parser.add_argument('--num_layers', type=int, default=2)
     parser.add_argument('--emb_size', type=int, default=500)
     parser.add_argument('--num_enc_symbols', type=int, default=30000)
     parser.add_argument('--num_dec_symbols', type=int, default=30000)
-    parser.add_argument('--dropout_rate', type=float, default=0.3)
+    parser.add_argument('--dropout_rate', type=float, default=0)
 
     # Training parameters
     parser.add_argument('--lr', type=float, default=0.0002)
     parser.add_argument('--max_grad_norm', type=float, default=1.0)
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--max_epochs', type=int, default=10)
     parser.add_argument('--maxi_batches', type=int, default=20)
-    parser.add_argument('--max_seq_len', type=int, default=50)
+    parser.add_argument('--max_seq_len', type=int, default=300)
     parser.add_argument('--display_freq', type=int, default=100)
-    parser.add_argument('--save_freq', type=int, default=200)
-    parser.add_argument('--valid_freq', type=int, default=200)
+    parser.add_argument('--save_freq', type=int, default=500)
+    parser.add_argument('--valid_freq', type=int, default=500)
     parser.add_argument('--model_dir', type=str, default='model/')
     parser.add_argument('--model_name', type=str, default='model.pkl')
     parser.add_argument('--shuffle', type=bool, default=True)
